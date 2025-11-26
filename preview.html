@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Preview Layout</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+
+  <body class="home blog">
+    <div id="page" class="site">
+      <header id="masthead" class="site-header">
+        <div class="header-container">
+          <div class="site-branding">
+            <h1 class="site-title"><a href="#">NEWS SITE</a></h1>
+          </div>
+          <nav id="site-navigation" class="main-navigation">
+            <ul>
+              <li><a href="#">Politics</a></li>
+              <li><a href="#">Economy</a></li>
+              <li><a href="#">Society</a></li>
+              <li><a href="#">Culture</a></li>
+            </ul>
+          </nav>
+          <div class="header-utils">
+            <button><i class="fa fa-search"></i></button>
+            <a href="#"><i class="fa fa-user"></i></a>
+          </div>
+        </div>
+      </header>
+
+      <main id="primary" class="site-main">
+        <div class="container main-grid">
+          <div class="content-area">
+            <div class="featured-news-section">
+              <div class="section-header">
+                <h2>Today's Major News</h2>
+              </div>
+              <article class="featured-post">
+                <img
+                  src="https://images.unsplash.com/photo-1494412574643-35d324698420?auto=format&fit=crop&w=800&q=80"
+                  alt="Shipping Logistics"
+                />
+                <div class="featured-content">
+                  <h3>
+                    <a href="#"
+                      >Global Shipping Crisis: 267 Cargo Ships Delayed at
+                      Port</a
+                    >
+                  </h3>
+                  <p>
+                    The maritime logistics chain is facing unprecedented delays
+                    as new regulations impact port entry speeds...
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="latest-news-list">
+              <article class="news-list-item">
+                <div class="post-thumbnail">
+                  <a href="#"
+                    ><img
+                      src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&q=80"
+                      alt="Tech News"
+                  /></a>
+                </div>
+                <div class="entry-wrapper">
+                  <header class="entry-header">
+                    <span class="cat-label">Economy</span>
+                    <h3 class="entry-title">
+                      <a href="#"
+                        >Coupang announces new logistics center in Daegu area</a
+                      >
+                    </h3>
+                  </header>
+                  <div class="entry-summary">
+                    <p>
+                      The tech giant is expanding its footprint with a new
+                      automated facility expected to create 4,500 jobs...
+                    </p>
+                  </div>
+                  <div class="entry-meta">Nov 22, 2025 &bull; Reporter Kim</div>
+                </div>
+              </article>
+
+              <article class="news-list-item">
+                <div class="post-thumbnail">
+                  <a href="#"
+                    ><img
+                      src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=500&q=80"
+                      alt="Education"
+                  /></a>
+                </div>
+                <div class="entry-wrapper">
+                  <header class="entry-header">
+                    <span class="cat-label">Society</span>
+                    <h3 class="entry-title">
+                      <a href="#"
+                        >University entrance exams to undergo major reform next
+                        year</a
+                      >
+                    </h3>
+                  </header>
+                  <div class="entry-summary">
+                    <p>
+                      The Ministry of Education released a statement regarding
+                      the upcoming changes to the CSAT scoring system...
+                    </p>
+                  </div>
+                  <div class="entry-meta">Nov 21, 2025 &bull; Reporter Lee</div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <aside class="sidebar-area">
+            <div id="secondary" class="widget-area">
+              <div class="widget custom-hot-news">
+                <h3 class="widget-title">Hot News</h3>
+                <ul>
+                  <li>
+                    <div class="sb-thumb">
+                      <img
+                        src="https://images.unsplash.com/photo-1599933339893-6e7920194098?auto=format&fit=crop&w=150&q=80"
+                      />
+                    </div>
+                    <div class="sb-text">
+                      <a href="#">Fire reported at industrial complex...</a>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="sb-thumb">
+                      <img
+                        src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=150&q=80"
+                      />
+                    </div>
+                    <div class="sb-text">
+                      <a href="#">Seoul real estate prices stabilize...</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="widget tagcloud">
+                <h3 class="widget-title">Keywords</h3>
+                <div class="tag-list">
+                  <a href="#">#Logistics</a>
+                  <a href="#">#Economy</a>
+                  <a href="#">#Tech</a>
+                  <a href="#">#Education</a>
+                  <a href="#">#Politics</a>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <footer id="colophon" class="site-footer">
+        <div class="container">
+          <div class="footer-col">
+            <h4>About Us</h4>
+            <p>Contact: help@news.com</p>
+          </div>
+          <div class="footer-col">
+            <h4>Terms & Policies</h4>
+            <ul>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company Info</h4>
+            <p>&copy; 2025 NEWS SITE</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
