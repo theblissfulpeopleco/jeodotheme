@@ -15,3 +15,159 @@
         </ul>
     </div>
 </div>```
+
+### 5. The CSS (`style.css`)
+This is the most important part to make it look like the Figma file. Add this to your `style.css` (below the default underscores header).
+
+```css
+/* --- Global & Typography --- */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background: #f9f9f9;
+}
+
+a { color: #111; text-decoration: none; }
+a:hover { color: #0056b3; }
+
+/* Container to center everything */
+.container, .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header --- */
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.main-navigation ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+    font-weight: 700;
+}
+
+/* --- Layout Grid (Main Content vs Sidebar) --- */
+.main-grid {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr; /* 70% Content, 30% Sidebar */
+    gap: 40px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+/* --- News List Items (Index Page) --- */
+.news-list-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+.news-list-item .post-thumbnail img {
+    width: 240px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.entry-title {
+    font-size: 1.4rem;
+    margin: 0 0 10px;
+    font-weight: 700;
+}
+.entry-summary {
+    color: #666;
+    font-size: 0.95rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- Single Post Styling --- */
+.single-header .entry-title {
+    font-size: 2.2rem;
+    line-height: 1.3;
+    margin-bottom: 20px;
+}
+.single-featured-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.entry-content {
+    font-size: 1.1rem;
+    color: #222;
+}
+
+/* --- Sidebar Styling --- */
+.widget-title {
+    font-size: 1.1rem;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Sidebar List Style (Image vs Text) */
+.widget ul { list-style: none; padding: 0; }
+.widget ul li {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.widget ul li img { /* If plugin adds images */
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Tags (Rounded Pills) */
+.tagcloud a {
+    display: inline-block;
+    padding: 5px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin: 0 5px 5px 0;
+    color: #555;
+}
+
+/* --- Footer (Blue Background) --- */
+.site-footer {
+    background-color: #0065BD; /* Korean News Blue */
+    color: #fff;
+    padding: 40px 0;
+}
+.site-footer a { color: #fff; opacity: 0.8; }
+.site-footer .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-grid {
+        grid-template-columns: 1fr; /* Stack on mobile */
+    }
+    .news-list-item {
+        flex-direction: column;
+    }
+    .news-list-item .post-thumbnail img {
+        width: 100%;
+        height: auto;
+    }
+}

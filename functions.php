@@ -176,3 +176,13 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+// Add this to functions.php
+function jeodo_news_setup() {
+    // Register the menu location
+    register_nav_menus(
+        array(
+            'menu-1' => esc_html__( 'Primary Menu', 'jeodo-news' ),
+        )
+    );
+}
+add_action( 'after_setup_theme', 'jeodo_news_setup' );
