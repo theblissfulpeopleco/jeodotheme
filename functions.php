@@ -141,7 +141,24 @@ function jeodotheme_scripts() {
 	wp_enqueue_style( 'jeodotheme-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'jeodotheme-style', 'rtl', 'replace' );
 
+	// Enqueue header styles
+	wp_enqueue_style( 'header-style', get_template_directory_uri() . '/styles/header.css', array(), _S_VERSION );
+
+	// Enqueue footer styles
+	wp_enqueue_style( 'footer-style', get_template_directory_uri() . '/styles/footer.css', array(), _S_VERSION );
+	
+	// Enqueue news layout styles
+	wp_enqueue_style( 'news-layout-style', get_template_directory_uri() . '/styles/news-layout.css', array(), _S_VERSION );
+
 	wp_enqueue_script( 'jeodotheme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	
+	// Enqueue header script
+	wp_enqueue_script( 'header-script', get_template_directory_uri() . '/js/header.js', array('jquery'), _S_VERSION, true );
+	
+	// Enqueue AJAX pagination script (only on home page)
+	if ( is_home() || is_front_page() ) {
+		wp_enqueue_script( 'ajax-pagination', get_template_directory_uri() . '/js/ajax-pagination.js', array('jquery'), _S_VERSION, true );
+	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -176,100 +193,16 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-<<<<<<< HEAD
 /**
- * Create default Login page when the theme is activated
+ * Set posts per page for main blog page
  */
-function jeodo_create_default_pages() {
-  
-	// Page Slug -> [ title, Template File ]
-	$pages = array(
-		'login' => array(
-			'title' 	=> 'Login',
-			'template'	=> 'page-login.php',
-		),
-		'register'	=> array(
-			'title'		=> 'Register',
-			'template'	=> 'page-register.php',
-		),
-		'account' => array(
-			'title'		=> 'My Account',
-			'template'	=> 'page-account.php',
-
-		),
-	),
-
-	foreach (	$pages as $slug => $page_data	) {
-
-		// Check if the page already exists
-        $existing = get_page_by_path( $slug );
-
-        if ( ! $existing ) {
-
-            // Create the page
-            $page_id = wp_insert_post( array(
-                'post_title'     => $page_data['title'],
-                'post_name'      => $slug,
-                'post_content'   => '',
-                'post_status'    => 'publish',
-                'post_type'      => 'page',
-                'comment_status' => 'closed',
-            ) );
-
-            // Assign template if creation successful
-            if ( $page_id && ! is_wp_error( $page_id ) ) {
-                update_post_meta( $page_id, '_wp_page_template', $page_data['template'] );
-            }
-        }
-
-	}
-}
-add_action( 'after_switch_theme', 'jeodo_create_default_pages' );
-
-/**
- * Redirect failed login to custom login page with error code
- */
-function jeodo_custom_login_failed( $username ) {
-    $referrer = wp_get_referer();
-    $login_page = home_url('/login');
-
-    // Determine the error type
-    if ( isset( $_REQUEST['log'] ) ) {
-        $user = get_user_by( 'login', $_REQUEST['log'] );
-        if ( ! $user ) {
-            $error_type = 'invalid_username';
-        } else {
-            $error_type = 'incorrect_password';
-        }
-    } else {
-        $error_type = 'invalid_username';
+function jeodotheme_posts_per_page( $query ) {
+    if ( !is_admin() && $query->is_main_query() && is_home() ) {
+        $query->set( 'posts_per_page', 2 );
     }
-
-    wp_redirect( $login_page . '?login=' . $error_type );
-    exit;
 }
-add_action( 'wp_login_failed', 'jeodo_custom_login_failed' );
+add_action( 'pre_get_posts', 'jeodotheme_posts_per_page' );
 
-/**
- * Redirect empty fields back to custom login page
- */
-function jeodo_check_empty_fields( $user, $username, $password ) {
-    if ( isset($_POST['log']) && empty($username) ) {
-        wp_redirect( home_url('/login?login=empty_username') );
-        exit;
-    }
-
-    if ( isset($_POST['pwd']) && empty($password) ) {
-        wp_redirect( home_url('/login?login=empty_password') );
-        exit;
-    }
-
-    return $user;
-}
-add_filter( 'authenticate', 'jeodo_check_empty_fields', 1, 3 );
-
-
-=======
 // Add this to functions.php
 function jeodo_news_setup() {
     // Register the menu location
@@ -280,4 +213,3 @@ function jeodo_news_setup() {
     );
 }
 add_action( 'after_setup_theme', 'jeodo_news_setup' );
->>>>>>> 5b72f94d7ebfd46f0b6f4a8a32d53866045ffa8e
