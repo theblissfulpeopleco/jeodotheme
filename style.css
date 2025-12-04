@@ -11,7 +11,8 @@ Version: 1.2.0
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -382,4 +383,50 @@ a:hover {
   .main-grid.single-post-layout {
     grid-template-columns: 1fr;
   }
+}
+
+/* --- CUSTOM LOGO & HEADER LAYOUT ADJUSTMENTS --- */
+
+/* 1. OLD PLACEHOLDER REMOVAL */
+.header-top-row,
+.banner-box,
+.banner-box a {
+  display: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* 2. CENTERS HEADER CONTENT (For alignment with your 1400px grids) */
+/* This rule centers the entire header row content */
+.header-mid-row {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 3. FIXES LOGO SIZE (USING !IMPORTANT) */
+.custom-logo {
+  /* FORCES the max height, overriding WordPress inline styles */
+  max-height: 100px !important;
+  width: auto !important; /* Ensures width scales proportionally */
+}
+
+.custom-logo-link {
+  /* Ensures the logo link wrapper itself is sized correctly */
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+/* 4. SETS ALIGNMENT TO LEFT-END */
+.header-flex-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Logo left, utils right */
+  width: 100%;
+}
+
+.header-logo {
+  text-align: left;
+  flex-grow: 0;
 }

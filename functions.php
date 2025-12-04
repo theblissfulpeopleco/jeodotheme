@@ -213,3 +213,32 @@ function jeodo_news_setup() {
     );
 }
 add_action( 'after_setup_theme', 'jeodo_news_setup' );
+
+function jeodo_widgets_init() {
+    register_sidebar( array(
+        'name'          => esc_html__( 'Footer Column 1 (Contact/Social)', 'jeodotheme' ),
+        'id'            => 'footer-col-1',
+        'description'   => esc_html__( 'Add widgets here for the first column.', 'jeodotheme' ),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ) );
+    // You can register more sidebars for Column 2 and 3 if needed, but menus are better for links.
+}
+add_action( 'widgets_init', 'jeodo_widgets_init' );
+
+function jeodo_customize_register( $wp_customize ) {
+    $wp_customize->add_setting( 'jeodo_footer_copyright', array(
+        'default'   => '© 사용 내역 및 실',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'jeodo_footer_copyright_control', array(
+        'label'    => __( 'Footer Copyright Text', 'jeodotheme' ),
+        'section'  => 'title_tagline', // Placing in Site Identity for simplicity
+        'settings' => 'jeodo_footer_copyright',
+        'type'     => 'text',
+    ) );
+}
+add_action( 'customize_register', 'jeodo_customize_register' );
