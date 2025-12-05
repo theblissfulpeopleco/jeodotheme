@@ -94,12 +94,16 @@
             </div> </header>
     <?php } // End Elementor fallback check ?>
 
-    <div class="search-overlay" style="display: none;">
-        <div class="search-overlay-content">
-            <button class="search-close">&times;</button>
-            <?php get_search_form(); ?>
-        </div>
-    </div>
+<div class="search-overlay" style="display: none;">
+            <button class="search-close search-back-link">
+                <span class="back-arrow">←</span>
+                Back
+            </button>
+        <div class="search-overlay-content">
+                
+            <?php get_search_form(); ?>
+        </div>
+    </div>
     
     <div id="content" class="site-content">
     <div id="primary" class="content-area">
