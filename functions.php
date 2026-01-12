@@ -201,8 +201,9 @@ function jeodotheme_scripts() {
     // Enqueue news layout styles
     wp_enqueue_style( 'news-layout-style', get_template_directory_uri() . '/styles/news-layout.css', array(), _S_VERSION );
     
-    // Enqueue article sidebar styles (only on single posts)
+    // Enqueue single post and article sidebar styles (only on single posts)
     if ( is_single() ) {
+        wp_enqueue_style( 'single-post-style', get_template_directory_uri() . '/styles/single-post.css', array(), _S_VERSION );
         wp_enqueue_style( 'article-sidebar-style', get_template_directory_uri() . '/styles/article-sidebar.css', array(), _S_VERSION );
     }
 
