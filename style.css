@@ -596,3 +596,425 @@ a:hover {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+/* Article Container Layout */
+.article-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 30px;
+}
+
+.article-content {
+    flex: 1;
+    max-width: 700px;
+}
+
+.article-sidebar {
+    width: 350px;
+    flex-shrink: 0;
+}
+
+/* Article Header */
+.article-header {
+    margin-bottom: 30px;
+}
+
+.category-label {
+    margin-bottom: 10px;
+}
+
+.category-label a {
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 3px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.article-title {
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin: 15px 0;
+    color: #333;
+}
+
+.article-meta {
+    color: #999;
+    font-size: 14px;
+}
+
+/* Featured Image */
+.article-featured-image {
+    margin: 30px 0;
+}
+
+.article-featured-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Article Body */
+.article-body {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    margin: 30px 0;
+}
+
+.article-body p {
+    margin-bottom: 20px;
+}
+
+.article-body a {
+    color: #0066cc;
+    text-decoration: underline;
+}
+
+/* Comments */
+.article-comments {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px solid #eee;
+}
+
+.article-comments h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* Sidebar Widgets */
+.sidebar-widget {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.sidebar-widget h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+}
+
+.sidebar-post {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.sidebar-post:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sidebar-post-image {
+    flex-shrink: 0;
+}
+
+.sidebar-post-image img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.sidebar-post-content h5 {
+    font-size: 15px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.sidebar-post-content h5 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.sidebar-post-content h5 a:hover {
+    color: #0066cc;
+}
+
+/* Related News Section */
+.related-news-section {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.related-news-section h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.related-news-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.related-news-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .article-container {
+        flex-direction: column;
+    }
+    
+    .article-sidebar {
+        width: 100%;
+    }
+    
+    .related-news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .related-news-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Category Archive Styles */
+.category-archive {
+    padding: 40px 20px;
+}
+
+.category-archive .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #333;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.archive-description {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Posts Grid */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.post-item {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-content {
+    padding: 20px;
+}
+
+.post-meta {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.post-title {
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+}
+
+.post-title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    color: #0066cc;
+}
+
+.post-excerpt {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.pagination .page-numbers {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-numbers:hover,
+.pagination .page-numbers.current {
+    background: #0066cc;
+    color: #fff;
+    border-color: #0066cc;
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Optional: Add shadow on scroll */
+.site-header.scrolled {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   FULL WIDTH LAYOUT MODIFICATIONS
+   Add this to your style.css or create a new CSS file
+   ========================================= */
+
+/* Remove max-width constraints and set proper padding */
+.top-news-grid,
+.section-divider,
+.major-news-grid,
+.main-grid.single-post-layout,
+.bottom-news-sections,
+.content-wrapper,
+.related-news-section,
+.category-archive .container {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box !important;
+}
+
+/* Bottom news sections */
+.bottom-news-sections {
+    width: 100% !important;
+    display: flex;
+    gap: 40px;
+}
+
+.bottom-news-column {
+    flex: 1;
+}
+
+/* Content wrapper grid */
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    width: 100% !important;
+}
+
+/* Article container */
+.article-container {
+    max-width: 100% !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+}
+
+/* Header alignment */
+.header-mid-row {
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box !important;
+}
+
+/* News list container on homepage */
+.news-list-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* News items should respect container padding */
+.news-item {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Site main content */
+#primary.site-main {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Sidebar */
+.sidebar-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Ensure body and html don't have extra padding */
+body, html {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Container class */
+.container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    max-width: 100% !important;
+}

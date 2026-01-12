@@ -111,10 +111,69 @@ function jeodotheme_widgets_init() {
         )
     );
     
+    // *** ARTICLE SIDEBAR WIDGET AREAS ***
+    
+    // Sidebar Featured Posts Area (오늘의 주요 뉴스)
+    register_sidebar( array(
+        'name'          => esc_html__( 'Article Sidebar - Featured Posts', 'jeodotheme' ),
+        'id'            => 'article-sidebar-featured',
+        'description'   => esc_html__( 'Widget area for featured posts section in article sidebar', 'jeodotheme' ),
+        'before_widget' => '<div class="sidebar-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ) );
+
+    // Sidebar Ad Space 1
+    register_sidebar( array(
+        'name'          => esc_html__( 'Article Sidebar - Advertisement 1', 'jeodotheme' ),
+        'id'            => 'article-sidebar-ad-1',
+        'description'   => esc_html__( 'First advertisement widget area in article sidebar. Use HTML/Text widget to add your ad code.', 'jeodotheme' ),
+        'before_widget' => '<div class="sidebar-widget ad-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ) );
+
+    // Sidebar Hot News Area (핫 뉴스)
+    register_sidebar( array(
+        'name'          => esc_html__( 'Article Sidebar - Hot News', 'jeodotheme' ),
+        'id'            => 'article-sidebar-hot',
+        'description'   => esc_html__( 'Widget area for hot news section in article sidebar', 'jeodotheme' ),
+        'before_widget' => '<div class="sidebar-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ) );
+
+    // Sidebar Ad Space 2
+    register_sidebar( array(
+        'name'          => esc_html__( 'Article Sidebar - Advertisement 2', 'jeodotheme' ),
+        'id'            => 'article-sidebar-ad-2',
+        'description'   => esc_html__( 'Second advertisement widget area in article sidebar. Use HTML/Text widget to add your ad code.', 'jeodotheme' ),
+        'before_widget' => '<div class="sidebar-widget ad-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ) );
+
+    // General Sidebar Widget Area
+    register_sidebar( array(
+        'name'          => esc_html__( 'Article Sidebar - General', 'jeodotheme' ),
+        'id'            => 'article-sidebar-general',
+        'description'   => esc_html__( 'General widget area for additional content in article sidebar', 'jeodotheme' ),
+        'before_widget' => '<div class="sidebar-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ) );
+    
+    // *** END ARTICLE SIDEBAR WIDGET AREAS ***
+    
     // *** FOOTER WIDGET AREA (for Footer Column 1) ***
     register_sidebar( array(
         'name'          => esc_html__( 'Footer Column 1 (Contact/Social)', 'jeodotheme' ),
-        'id'            => 'footer-col-1', // Matches the ID used in footer.php
+        'id'            => 'footer-col-1',
         'description'   => esc_html__( 'Use this area for Contact Info, Social Icons, or general text.', 'jeodotheme' ),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget'  => '</section>',
@@ -141,6 +200,17 @@ function jeodotheme_scripts() {
     
     // Enqueue news layout styles
     wp_enqueue_style( 'news-layout-style', get_template_directory_uri() . '/styles/news-layout.css', array(), _S_VERSION );
+    
+    // Enqueue article sidebar styles (only on single posts)
+    if ( is_single() ) {
+        wp_enqueue_style( 'article-sidebar-style', get_template_directory_uri() . '/styles/article-sidebar.css', array(), _S_VERSION );
+    }
+
+    // Enqueue category archive styles and scripts (only on category pages)
+    if ( is_category() ) {
+        wp_enqueue_style( 'category-archive-style', get_template_directory_uri() . '/styles/category-archive.css', array(), _S_VERSION );
+        wp_enqueue_script( 'category-ajax', get_template_directory_uri() . '/js/category-ajax.js', array('jquery'), _S_VERSION, true );
+    }
 
     wp_enqueue_script( 'jeodotheme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
     
@@ -165,12 +235,12 @@ function jeodo_customize_register( $wp_customize ) {
     $wp_customize->add_setting( 'jeodo_footer_copyright', array(
         'default'           => '© 사용 내역 및 실',
         'sanitize_callback' => 'sanitize_text_field',
-        'transport'         => 'postMessage', // Use postMessage for live preview if you want
+        'transport'         => 'postMessage',
     ) );
 
     $wp_customize->add_control( 'jeodo_footer_copyright_control', array(
         'label'    => __( 'Footer Copyright Text', 'jeodotheme' ),
-        'section'  => 'title_tagline', // Placing in Site Identity for simplicity
+        'section'  => 'title_tagline',
         'settings' => 'jeodo_footer_copyright',
         'type'     => 'text',
     ) );
@@ -193,10 +263,6 @@ require get_template_directory() . '/inc/template-tags.php';
  */
 require get_template_directory() . '/inc/template-functions.php';
 
-// Note: Your original file included this, but the logic was moved into the function above.
-// If you have a separate file for customizer, you should keep the require here.
-// require get_template_directory() . '/inc/customizer.php';
-
 
 /**
  * Load Jetpack compatibility file.
@@ -209,39 +275,42 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  * Set posts per page for main blog page
  */
 function jeodotheme_posts_per_page( $query ) {
-    if ( !is_admin() && $query->is_main_query() && is_home() ) {
-        $query->set( 'posts_per_page', 2 );
+    if ( !is_admin() && $query->is_main_query() ) {
+        if ( is_home() ) {
+            $query->set( 'posts_per_page', 2 );
+        } elseif ( is_category() ) {
+            $query->set( 'posts_per_page', 3 );
+        }
     }
 }
 add_action( 'pre_get_posts', 'jeodotheme_posts_per_page' );
 
-// Add this to your jeodo_customize_register function in functions.php:
-function jeodo_contact_customize_register( $wp_customize ) {
-    // ... (Your existing social link registrations)
-
-    // Add settings for Contact Details
-    $wp_customize->add_setting( 'jeodo_contact_address', array(
-        'default'           => 'Example Street, City, Country',
-        'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'jeodo_contact_address_control', array(
-        'label'    => __( 'Contact Address', 'jeodotheme' ),
-        'section'  => 'jeodo_social_settings', // Use your Social Section
-        'type'     => 'text',
-    ) );
+/**
+ * Customizer for Logo Text
+ */
+function jeodo_logo_customize_register( $wp_customize ) {
     
-    $wp_customize->add_setting( 'jeodo_contact_email', array(
-        'default'           => 'online@email.com',
-        'sanitize_callback' => 'sanitize_email',
+    // Add setting for logo text
+    $wp_customize->add_setting( 'jeodo_logo_text', array(
+        'default'           => 'COMPANY LOGO',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
     ) );
-    $wp_customize->add_control( 'jeodo_contact_email_control', array(
-        'label'    => __( 'Contact Email', 'jeodotheme' ),
-        'section'  => 'jeodo_social_settings',
-        'type'     => 'email',
+
+    // Add control for logo text
+    $wp_customize->add_control( 'jeodo_logo_text_control', array(
+        'label'    => __( 'Logo Text (if no logo uploaded)', 'jeodotheme' ),
+        'section'  => 'title_tagline',
+        'settings' => 'jeodo_logo_text',
+        'type'     => 'text',
+        'priority' => 8,
     ) );
 }
-add_action( 'customize_register', 'jeodo_contact_customize_register', 20 );
+add_action( 'customize_register', 'jeodo_logo_customize_register', 30 );
 
+/**
+ * Contact & Social Media Customizer Settings
+ */
 function jeodo_contact_social_customize_register( $wp_customize ) {
     // 1. Add a dedicated section
     $wp_customize->add_section( 'jeodo_contact_social', array(
@@ -270,7 +339,7 @@ function jeodo_contact_social_customize_register( $wp_customize ) {
         'type'     => 'email',
     ) );
 
-    // 3. Register Social Media URL Fields (Example for Facebook/Instagram)
+    // 3. Register Social Media URL Fields
     $wp_customize->add_setting( 'jeodo_social_facebook', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
@@ -290,6 +359,26 @@ function jeodo_contact_social_customize_register( $wp_customize ) {
         'section'  => 'jeodo_contact_social',
         'type'     => 'url',
     ) );
-    // ... (Repeat for messenger, kakao, youtube)
+    
+    $wp_customize->add_setting( 'jeodo_social_twitter', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'jeodo_social_twitter_control', array(
+        'label'    => __( 'Twitter/X URL', 'jeodotheme' ),
+        'section'  => 'jeodo_contact_social',
+        'type'     => 'url',
+    ) );
+    
+    $wp_customize->add_setting( 'jeodo_social_youtube', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'jeodo_social_youtube_control', array(
+        'label'    => __( 'YouTube URL', 'jeodotheme' ),
+        'section'  => 'jeodo_contact_social',
+        'type'     => 'url',
+    ) );
 }
 add_action( 'customize_register', 'jeodo_contact_social_customize_register' );
+?>
